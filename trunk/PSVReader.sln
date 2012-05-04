@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSVReader", "PSVReader\PSVReader.csproj", "{36F448E1-1A7B-4D8F-96CB-65EDACAA40B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36F448E1-1A7B-4D8F-96CB-65EDACAA40B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F448E1-1A7B-4D8F-96CB-65EDACAA40B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F448E1-1A7B-4D8F-96CB-65EDACAA40B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F448E1-1A7B-4D8F-96CB-65EDACAA40B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PSVReader\PSVReader.csproj
+	EndGlobalSection
+EndGlobal
