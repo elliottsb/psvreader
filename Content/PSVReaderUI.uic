@@ -12,14 +12,65 @@
             <LayoutProperty>
               <X>0</X>
               <Y>0</Y>
-              <Width>959</Width>
+              <Width>960</Width>
               <Height>544</Height>
+              <Visible>true</Visible>
+              <Anchors>Top Bottom Left Right</Anchors>
+            </LayoutProperty>
+            <LayoutProperty>
+              <X>0</X>
+              <Y>-14.780374354961964</Y>
+              <Width>100</Width>
+              <Height>100</Height>
               <Visible>true</Visible>
               <Anchors>Top Height Left Width</Anchors>
             </LayoutProperty>
+          </LayoutProperty>
+          <Property i:type="PanelProperty">
+            <Effect>None</Effect>
+            <OwnerNode z:Ref="i3" />
+            <VariableName>MainWindow</VariableName>
+            <BackgroundAlpha>100</BackgroundAlpha>
+            <BackgroundColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+              <d7p1:A>255</d7p1:A>
+              <d7p1:B>153</d7p1:B>
+              <d7p1:G>153</d7p1:G>
+              <d7p1:R>153</d7p1:R>
+              <d7p1:ScA>1</d7p1:ScA>
+              <d7p1:ScB>0.318546772</d7p1:ScB>
+              <d7p1:ScG>0.318546772</d7p1:ScG>
+              <d7p1:ScR>0.318546772</d7p1:ScR>
+            </BackgroundColor>
+          </Property>
+          <IsRoot>false</IsRoot>
+          <PivotPos>LeftTop</PivotPos>
+          <WidgetType>Panel</WidgetType>
+          <ID>2100752365</ID>
+          <ZIndex>0</ZIndex>
+          <LayoutAssistInfo>
+            <SnapGuidesList>
+              <ArrayOfSnapGuide />
+              <ArrayOfSnapGuide />
+            </SnapGuidesList>
+          </LayoutAssistInfo>
+          <IsHideInLayout>false</IsHideInLayout>
+          <IsLockInLayout>false</IsLockInLayout>
+        </UICNode>
+        <UICNode z:Id="i4" i:type="ObjectTreeNode">
+          <Parent z:Ref="i2" />
+          <Nodes />
+          <LayoutProperty>
             <LayoutProperty>
-              <X>152.45042354615634</X>
-              <Y>84.631162342415962</Y>
+              <X>0</X>
+              <Y>0</Y>
+              <Width>960</Width>
+              <Height>554</Height>
+              <Visible>true</Visible>
+              <Anchors>Top Bottom Left Right</Anchors>
+            </LayoutProperty>
+            <LayoutProperty>
+              <X>0</X>
+              <Y>91.690872417969558</Y>
               <Width>214</Width>
               <Height>36</Height>
               <Visible>true</Visible>
@@ -28,11 +79,11 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i3" />
+            <OwnerNode z:Ref="i4" />
             <VariableName>Label_1</VariableName>
             <H_Alignment>Left</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
-            <LineBreaks>Character</LineBreaks>
+            <LineBreaks>Word</LineBreaks>
             <Text>label</Text>
             <TextAlpha>100</TextAlpha>
             <TextColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -57,7 +108,7 @@
           <IsRoot>false</IsRoot>
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>Label</WidgetType>
-          <ID>1859100308</ID>
+          <ID>1872126852</ID>
           <ZIndex>0</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
@@ -129,5 +180,5 @@
   <NameSpace>PSVReaderUI</NameSpace>
   <Language i:nil="true" />
   <LanguageTableFileName>PSVReaderUI_LanguageTable.csv</LanguageTableFileName>
-  <ClassDir></ClassDir>
+  <ClassDir>UICompile</ClassDir>
 </Project>

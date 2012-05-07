@@ -6,12 +6,14 @@ using Sce.Pss.Core.Environment;
 using Sce.Pss.Core.Graphics;
 using Sce.Pss.Core.Input;
 using Sce.Pss.HighLevel.UI;
+using System.Text; 
 
 namespace PSVReader
 {
 	public class AppMain
 	{
 		private static GraphicsContext graphics;
+		private static PSVReaderUI.MainFrame MainWnd;
 		
 		public static void Main (string[] args)
 		{
@@ -33,8 +35,23 @@ namespace PSVReader
 			// Create scene			
 			UISystem.Initialize(graphics);
 			
+			MainWnd = new PSVReaderUI.MainFrame();
 			// Set scene
-			UISystem.SetScene(MyScene, null);
+			UISystem.SetScene(MainWnd, null);
+			
+			HttpDownload.DownloadContent("http://192.168.1.102/1234.txt");
+			
+			PSVReader.FileStorage.SetFileName("/Documents/testdata.dat");
+			
+			var tmpString = "12321a中文测试";
+
+			UnicodeEncoding encoding = new UnicodeEncoding();    
+			byte[] tmpbyte = encoding.GetBytes(tmpString);
+			
+			PSVReader.FileStorage.WriteContent(tmpbyte);
+			
+			tmpString = encoding.GetString(PSVReader.FileStorage.ReadContent()); 
+			
 		}
 
 		public static void Update ()
@@ -44,9 +61,23 @@ namespace PSVReader
 			
 			// Query touch for current state
             List<TouchData> touchDataList = Touch.GetData (0);
-
+			
+			//MainWnd.UpdateText("中文测试");
+			
             // Update UI Toolkit
             UISystem.Update(touchDataList);
+			
+			HttpDownload.Update();
+			
+			byte[] byttemp = HttpDownload.GetRawData();
+			
+			if (null != byttemp)
+			{
+				ASCIIEncoding encoding = new ASCIIEncoding();   
+				var tempstring = encoding.GetString(byttemp);
+			
+				MainWnd.UpdateText(tempstring);			
+			}
 		}
 
 		public static void Render ()

@@ -34,9 +34,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Sce.Pss.Core" />
+    <Reference Include="Sce.Pss.HighLevel.UI" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
+    <Compile Include="UICompile\MainFrame.composer.cs" />
+    <Compile Include="UICompile\MainFrame.cs" />
+    <Compile Include="UICompile\UIStringTable.cs" />
+    <Compile Include="FileStorage.cs" />
+    <Compile Include="HttpDownload.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -45,4 +51,7 @@
     <ShaderProgram Include="shaders\Texture.vcg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Pss.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="UICompile\" />
+  </ItemGroup>
 </Project>
