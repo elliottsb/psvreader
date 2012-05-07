@@ -39,19 +39,20 @@ namespace PSVReader
 			// Set scene
 			UISystem.SetScene(MainWnd, null);
 			
-			HttpDownload.DownloadContent("http://192.168.1.102/1234.txt");
-			
-			PSVReader.FileStorage.SetFileName("/Documents/testdata.dat");
+			HttpDownload.DownloadContent("http://192.168.1.102/1234.txt");		
 			
 			var tmpString = "12321a中文测试";
 
 			UnicodeEncoding encoding = new UnicodeEncoding();    
 			byte[] tmpbyte = encoding.GetBytes(tmpString);
 			
-			PSVReader.FileStorage.WriteContent(tmpbyte);
+			PSVReader.FileStorage onefile = new PSVReader.FileStorage("/Application/1.txt");
+			onefile.WriteContent(tmpbyte);
 			
-			tmpString = encoding.GetString(PSVReader.FileStorage.ReadContent()); 
+			tmpString = "223";
+			tmpString = encoding.GetString(onefile.ReadContent());
 			
+			//MainWnd.UpdateText(tmpString);	
 		}
 
 		public static void Update ()
@@ -76,7 +77,7 @@ namespace PSVReader
 				ASCIIEncoding encoding = new ASCIIEncoding();   
 				var tempstring = encoding.GetString(byttemp);
 			
-				MainWnd.UpdateText(tempstring);			
+				//MainWnd.UpdateText(tempstring);			
 			}
 		}
 

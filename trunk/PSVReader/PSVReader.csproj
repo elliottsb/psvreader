@@ -38,11 +38,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
+    <Compile Include="FileStorage.cs" />
+    <Compile Include="HttpDownload.cs" />
+    <Compile Include="FileManage.cs" />
     <Compile Include="UICompile\MainFrame.composer.cs" />
     <Compile Include="UICompile\MainFrame.cs" />
     <Compile Include="UICompile\UIStringTable.cs" />
-    <Compile Include="FileStorage.cs" />
-    <Compile Include="HttpDownload.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

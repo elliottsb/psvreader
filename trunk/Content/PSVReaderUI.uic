@@ -7,7 +7,214 @@
       <Nodes>
         <UICNode z:Id="i3" i:type="ObjectTreeNode">
           <Parent z:Ref="i2" />
-          <Nodes />
+          <Nodes>
+            <UICNode z:Id="i4" i:type="ObjectTreeNode">
+              <Parent z:Ref="i3" />
+              <Nodes />
+              <LayoutProperty>
+                <LayoutProperty>
+                  <X>100</X>
+                  <Y>0</Y>
+                  <Width>860</Width>
+                  <Height>554</Height>
+                  <Visible>true</Visible>
+                  <Anchors>Top Bottom Left Right</Anchors>
+                </LayoutProperty>
+                <LayoutProperty>
+                  <X>0</X>
+                  <Y>91.690872417969558</Y>
+                  <Width>214</Width>
+                  <Height>36</Height>
+                  <Visible>true</Visible>
+                  <Anchors>Top Height Left Width</Anchors>
+                </LayoutProperty>
+              </LayoutProperty>
+              <Property i:type="LabelProperty">
+                <Effect>None</Effect>
+                <OwnerNode z:Ref="i4" />
+                <VariableName>Label_1</VariableName>
+                <H_Alignment>Left</H_Alignment>
+                <HasTextShadow>false</HasTextShadow>
+                <LineBreaks>Word</LineBreaks>
+                <Text>label</Text>
+                <TextAlpha>100</TextAlpha>
+                <TextColor xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                  <d9p1:A>255</d9p1:A>
+                  <d9p1:B>0</d9p1:B>
+                  <d9p1:G>0</d9p1:G>
+                  <d9p1:R>0</d9p1:R>
+                  <d9p1:ScA>1</d9p1:ScA>
+                  <d9p1:ScB>0</d9p1:ScB>
+                  <d9p1:ScG>0</d9p1:ScG>
+                  <d9p1:ScR>0</d9p1:ScR>
+                </TextColor>
+                <TextFont xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                  <d9p1:FontFamily>System</d9p1:FontFamily>
+                  <d9p1:FontSize>25</d9p1:FontSize>
+                  <d9p1:FontStyle>Regular</d9p1:FontStyle>
+                </TextFont>
+                <TextShadow xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                <TextTrimming>EllipsisCharacter</TextTrimming>
+                <V_Alignment>Top</V_Alignment>
+              </Property>
+              <IsRoot>false</IsRoot>
+              <PivotPos>LeftTop</PivotPos>
+              <WidgetType>Label</WidgetType>
+              <ID>1872126852</ID>
+              <ZIndex>2</ZIndex>
+              <LayoutAssistInfo>
+                <SnapGuidesList>
+                  <ArrayOfSnapGuide />
+                  <ArrayOfSnapGuide />
+                </SnapGuidesList>
+              </LayoutAssistInfo>
+              <IsHideInLayout>false</IsHideInLayout>
+              <IsLockInLayout>false</IsLockInLayout>
+            </UICNode>
+            <UICNode z:Id="i5" i:type="ObjectTreeNode">
+              <Parent z:Ref="i3" />
+              <Nodes />
+              <LayoutProperty>
+                <LayoutProperty>
+                  <X>661.42933881494423</X>
+                  <Y>120.16657759452028</Y>
+                  <Width>173</Width>
+                  <Height>56</Height>
+                  <Visible>true</Visible>
+                  <Anchors>Top Height Left Width</Anchors>
+                </LayoutProperty>
+                <LayoutProperty>
+                  <X>690.643206573099</X>
+                  <Y>16.4320246672483</Y>
+                  <Width>214</Width>
+                  <Height>56</Height>
+                  <Visible>true</Visible>
+                  <Anchors>Top Height Left Width</Anchors>
+                </LayoutProperty>
+              </LayoutProperty>
+              <Property i:type="ButtonProperty">
+                <Effect>None</Effect>
+                <OwnerNode z:Ref="i5" />
+                <VariableName>DownloadBtn</VariableName>
+                <BackgroundButtonImage xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                <BackgroundType>Default</BackgroundType>
+                <ButtonImage i:nil="true" />
+                <ButtonType>TextButton</ButtonType>
+                <FilterColor xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                  <d9p1:A>255</d9p1:A>
+                  <d9p1:B>255</d9p1:B>
+                  <d9p1:G>255</d9p1:G>
+                  <d9p1:R>255</d9p1:R>
+                  <d9p1:ScA>1</d9p1:ScA>
+                  <d9p1:ScB>1</d9p1:ScB>
+                  <d9p1:ScG>1</d9p1:ScG>
+                  <d9p1:ScR>1</d9p1:ScR>
+                </FilterColor>
+                <HasTextShadow>false</HasTextShadow>
+                <NinePatchMargin xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                  <d9p1:ButtomRowHeight>27</d9p1:ButtomRowHeight>
+                  <d9p1:LeftColumnWidth>42</d9p1:LeftColumnWidth>
+                  <d9p1:RightColumnWidth>42</d9p1:RightColumnWidth>
+                  <d9p1:TopRowHeight>27</d9p1:TopRowHeight>
+                </NinePatchMargin>
+                <Text>Download</Text>
+                <TextAlpha>100</TextAlpha>
+                <TextColor xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                  <d9p1:A>255</d9p1:A>
+                  <d9p1:B>0</d9p1:B>
+                  <d9p1:G>0</d9p1:G>
+                  <d9p1:R>0</d9p1:R>
+                  <d9p1:ScA>1</d9p1:ScA>
+                  <d9p1:ScB>0</d9p1:ScB>
+                  <d9p1:ScG>0</d9p1:ScG>
+                  <d9p1:ScR>0</d9p1:ScR>
+                </TextColor>
+                <TextFont xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                  <d9p1:FontFamily>System</d9p1:FontFamily>
+                  <d9p1:FontSize>25</d9p1:FontSize>
+                  <d9p1:FontStyle>Regular</d9p1:FontStyle>
+                </TextFont>
+                <TextShadow xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                <TextTrimming>EllipsisCharacter</TextTrimming>
+              </Property>
+              <IsRoot>false</IsRoot>
+              <PivotPos>LeftTop</PivotPos>
+              <WidgetType>Button</WidgetType>
+              <ID>195146917</ID>
+              <ZIndex>3</ZIndex>
+              <LayoutAssistInfo>
+                <SnapGuidesList>
+                  <ArrayOfSnapGuide />
+                  <ArrayOfSnapGuide />
+                </SnapGuidesList>
+              </LayoutAssistInfo>
+              <IsHideInLayout>false</IsHideInLayout>
+              <IsLockInLayout>false</IsLockInLayout>
+            </UICNode>
+            <UICNode z:Id="i6" i:type="ObjectTreeNode">
+              <Parent z:Ref="i3" />
+              <Nodes />
+              <LayoutProperty>
+                <LayoutProperty>
+                  <X>546.24933195890253</X>
+                  <Y>41.717355259776411</Y>
+                  <Width>360</Width>
+                  <Height>56</Height>
+                  <Visible>true</Visible>
+                  <Anchors>Top Height Left Width</Anchors>
+                </LayoutProperty>
+                <LayoutProperty>
+                  <X>583.43364165379649</X>
+                  <Y>19.406769442839845</Y>
+                  <Width>360</Width>
+                  <Height>56</Height>
+                  <Visible>true</Visible>
+                  <Anchors>Top Height Left Width</Anchors>
+                </LayoutProperty>
+              </LayoutProperty>
+              <Property i:type="EditableTextProperty">
+                <Effect>None</Effect>
+                <OwnerNode z:Ref="i6" />
+                <VariableName>download_url</VariableName>
+                <DefaultText></DefaultText>
+                <H_Alignment>Left</H_Alignment>
+                <LineBreaks>Character</LineBreaks>
+                <Text>Edit</Text>
+                <TextAlpha>100</TextAlpha>
+                <TextColor xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                  <d9p1:A>255</d9p1:A>
+                  <d9p1:B>0</d9p1:B>
+                  <d9p1:G>0</d9p1:G>
+                  <d9p1:R>0</d9p1:R>
+                  <d9p1:ScA>1</d9p1:ScA>
+                  <d9p1:ScB>0</d9p1:ScB>
+                  <d9p1:ScG>0</d9p1:ScG>
+                  <d9p1:ScR>0</d9p1:ScR>
+                </TextColor>
+                <TextFont xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                  <d9p1:FontFamily>System</d9p1:FontFamily>
+                  <d9p1:FontSize>25</d9p1:FontSize>
+                  <d9p1:FontStyle>Regular</d9p1:FontStyle>
+                </TextFont>
+                <TextInputMode>Normal</TextInputMode>
+                <TextTrimming>EllipsisCharacter</TextTrimming>
+                <V_Alignment>Middle</V_Alignment>
+              </Property>
+              <IsRoot>false</IsRoot>
+              <PivotPos>LeftTop</PivotPos>
+              <WidgetType>EditableText</WidgetType>
+              <ID>1811569178</ID>
+              <ZIndex>4</ZIndex>
+              <LayoutAssistInfo>
+                <SnapGuidesList>
+                  <ArrayOfSnapGuide />
+                  <ArrayOfSnapGuide />
+                </SnapGuidesList>
+              </LayoutAssistInfo>
+              <IsHideInLayout>false</IsHideInLayout>
+              <IsLockInLayout>false</IsLockInLayout>
+            </UICNode>
+          </Nodes>
           <LayoutProperty>
             <LayoutProperty>
               <X>0</X>
@@ -46,7 +253,7 @@
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>Panel</WidgetType>
           <ID>2100752365</ID>
-          <ZIndex>0</ZIndex>
+          <ZIndex>1</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
@@ -56,60 +263,41 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i4" i:type="ObjectTreeNode">
+        <UICNode z:Id="i7" i:type="ObjectTreeNode">
           <Parent z:Ref="i2" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
               <X>0</X>
               <Y>0</Y>
-              <Width>960</Width>
-              <Height>554</Height>
+              <Width>100</Width>
+              <Height>544</Height>
               <Visible>true</Visible>
               <Anchors>Top Bottom Left Right</Anchors>
             </LayoutProperty>
             <LayoutProperty>
-              <X>0</X>
-              <Y>91.690872417969558</Y>
-              <Width>214</Width>
-              <Height>36</Height>
+              <X>-16.866200753922897</X>
+              <Y>0</Y>
+              <Width>100</Width>
+              <Height>50</Height>
               <Visible>true</Visible>
               <Anchors>Top Height Left Width</Anchors>
             </LayoutProperty>
           </LayoutProperty>
-          <Property i:type="LabelProperty">
+          <Property i:type="GridListPanelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i4" />
-            <VariableName>Label_1</VariableName>
-            <H_Alignment>Left</H_Alignment>
-            <HasTextShadow>false</HasTextShadow>
-            <LineBreaks>Word</LineBreaks>
-            <Text>label</Text>
-            <TextAlpha>100</TextAlpha>
-            <TextColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-              <d7p1:A>255</d7p1:A>
-              <d7p1:B>0</d7p1:B>
-              <d7p1:G>0</d7p1:G>
-              <d7p1:R>0</d7p1:R>
-              <d7p1:ScA>1</d7p1:ScA>
-              <d7p1:ScB>0</d7p1:ScB>
-              <d7p1:ScG>0</d7p1:ScG>
-              <d7p1:ScR>0</d7p1:ScR>
-            </TextColor>
-            <TextFont xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-              <d7p1:FontFamily>System</d7p1:FontFamily>
-              <d7p1:FontSize>25</d7p1:FontSize>
-              <d7p1:FontStyle>Regular</d7p1:FontStyle>
-            </TextFont>
-            <TextShadow xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-            <TextTrimming>EllipsisCharacter</TextTrimming>
-            <V_Alignment>Top</V_Alignment>
+            <OwnerNode z:Ref="i7" />
+            <VariableName>GridListPanel_1</VariableName>
+            <GridListPanelItemID>0</GridListPanelItemID>
+            <GridListPanelItemNode i:nil="true" />
+            <Orientation>Vertical</Orientation>
+            <ScrollBarVisibility>ScrollableVisible</ScrollBarVisibility>
           </Property>
           <IsRoot>false</IsRoot>
           <PivotPos>LeftTop</PivotPos>
-          <WidgetType>Label</WidgetType>
-          <ID>1872126852</ID>
-          <ZIndex>0</ZIndex>
+          <WidgetType>GridListPanel</WidgetType>
+          <ID>1913302159</ID>
+          <ZIndex>5</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
