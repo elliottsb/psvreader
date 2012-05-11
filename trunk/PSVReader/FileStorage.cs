@@ -13,17 +13,15 @@ namespace PSVReader
 	public class FileOpHelper
 	{
     	private static byte[] inputData;
-		private static int maxReadLen = 5000;
-		private static int sessionOffset = 0;
 		
 		public static byte[] ReadContent(string filename)
 		{
 			if ( true == CheckFileExsit(filename)) {
                 using (System.IO.FileStream hStream = System.IO.File.Open(filename, FileMode.Open)) {
                     if (hStream != null) {
-                        long size = hStream.Length < maxReadLen ? hStream.Length : maxReadLen;
+                        long size = hStream.Length;
                         inputData = new byte[size];
-						sessionOffset += hStream.Read(inputData, sessionOffset, (int)size);
+						hStream.Read(inputData, 0, (int)size);
 						hStream.Close();
 						return inputData;
                     }
@@ -35,7 +33,7 @@ namespace PSVReader
 		
 		public static void WriteContent(byte[] data, string filename)
 		{
-			using (System.IO.FileStream hStream = System.IO.File.Open(filename, FileMode.OpenOrCreate)) {
+			using (System.IO.FileStream hStream = System.IO.File.Open(filename, FileMode.Open)) {
                    hStream.SetLength((int)data.Length);
                    hStream.Write(data, 0, (int)data.Length);
                    hStream.Close();
@@ -50,21 +48,54 @@ namespace PSVReader
 	
 	public class FileStorage
 	{
-		private static string filename;
-
+		private string pathname;
+		private string filename;
+		private string cfgfilename;
 		
-		public FileStorage ()
+		public FileStorage (string filepathname)
 		{
+			pathname = filepathname;
+			
+			string chaptername = pathname.Substring(pathname.LastIndexOf('/'), 
+			                                        pathname.Length - pathname.LastIndexOf('/'));
+			
+			filename = pathname + chaptername + ".txt";
+			cfgfilename = pathname + chaptername + ".cfg";
+			
+			preparefile();
 		}
 		
-		public FileStorage (string name)
+		private void preparefile()
 		{
-			filename = name;
+			if (false == System.IO.File.Exists(filename))
+			{
+				System.IO.File.Create(filename).Close();
+			}
+			
+			if (false == System.IO.File.Exists(cfgfilename))
+			{
+				System.IO.File.Create(cfgfilename).Close();
+			}
 		}
 		
 		public byte[] ReadContent()
 		{
 			return FileOpHelper.ReadContent(filename);
+		}
+		
+		public int LastReadSign()
+		{
+			return 0;
+		}
+		
+		public void SaveLastReadSign()
+		{
+			
+		}
+		
+		public string GetEncodingType()
+		{
+			return "ascii";
 		}
 		
 		public void WriteContent(byte[] data)

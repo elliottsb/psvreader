@@ -12,10 +12,11 @@ namespace PSVReaderUI
     partial class MainFrame
     {
         Panel MainWindow;
-        Label Label_1;
         Button DownloadBtn;
         EditableText download_url;
-        GridListPanel GridListPanel_1;
+        ScrollPanel ScrollPanel_Text;
+        StoryNameList ListPanel_FileList;
+		static Label ContentLabel;
 
         private void InitializeWidget()
         {
@@ -26,56 +27,58 @@ namespace PSVReaderUI
         {
             MainWindow = new Panel();
             MainWindow.Name = "MainWindow";
-            Label_1 = new Label();
-            Label_1.Name = "Label_1";
             DownloadBtn = new Button();
             DownloadBtn.Name = "DownloadBtn";
             download_url = new EditableText();
             download_url.Name = "download_url";
-            GridListPanel_1 = new GridListPanel(GridListScrollOrientation.Vertical);
-            GridListPanel_1.Name = "GridListPanel_1";
+            ScrollPanel_Text = new ScrollPanel();
+            ScrollPanel_Text.Name = "ScrollPanel_Text";
+			ContentLabel = new Label();
+			ContentLabel.Name = "ContentLabel";
+            ListPanel_FileList = new StoryNameList();
+            ListPanel_FileList.Name = "ListPanel_FileList";
 
-            // Label_1
-            Label_1.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            Label_1.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
-            Label_1.LineBreak = LineBreak.Word;
-            Label_1.VerticalAlignment = VerticalAlignment.Top;
 
             // DownloadBtn
             DownloadBtn.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            DownloadBtn.TextFont = new Font( FontAlias.System, 25, FontStyle.Regular);
-			DownloadBtn.ButtonAction += HandleButton1ButtonAction;
+            DownloadBtn.TextFont = new Font( FontAlias.System, 25, FontStyle.Regular);			
 			
             // download_url
             download_url.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             download_url.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
             download_url.LineBreak = LineBreak.Character;
 
+            // ScrollPanel_Text
+            ScrollPanel_Text.HorizontalScroll = true;
+            ScrollPanel_Text.VerticalScroll = true;
+            ScrollPanel_Text.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
+			 
+			// ContentLabel
+			ScrollPanel_Text.AddChildLast(ContentLabel);
+			ContentLabel.BackgroundColor = new UIColor(0.7f, 0.5f, 0.5f, 1.0f);
+			
+            // ListPanel_FileList
+            ListPanel_FileList.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
+			ListPanel_FileList.BackgroundColor = new UIColor(0.12f, 0.12f, 0.12f, 1.0f);			
+			
             // MainWindow
             MainWindow.Clip = true;
             MainWindow.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
-            this.MainWindow.AddChildLast(Label_1);
+            this.MainWindow.AddChildLast(ScrollPanel_Text);
+            this.MainWindow.AddChildLast(ListPanel_FileList);
             this.MainWindow.AddChildLast(DownloadBtn);
             this.MainWindow.AddChildLast(download_url);
-
-            //GridListPanel_1
-            GridListPanel_1.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
-
+			
             // Scene
             this.RootWidget.AddChildLast(MainWindow);
-            this.RootWidget.AddChildLast(GridListPanel_1);
 
             SetWidgetLayout(orientation);
 
             UpdateLanguage();
+			
+			CustomInit();
         }
-		
-		void HandleButton1ButtonAction(object sender, TouchEventArgs e)
-		{
-    		Label_1.Text = "Stop";
-		}
 
-		
         private LayoutOrientation _currentLayoutOrientation;
         public void SetWidgetLayout(LayoutOrientation orientation)
         {
@@ -85,30 +88,35 @@ namespace PSVReaderUI
                 this.DesignWidth = 544;
                 this.DesignHeight = 960;
 
-                MainWindow.SetPosition(0, -14);
+                MainWindow.SetPosition(0, 0);
                 MainWindow.SetSize(100, 100);
                 MainWindow.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 MainWindow.Visible = true;
 
-                Label_1.SetPosition(0, 91);
-                Label_1.SetSize(214, 36);
-                Label_1.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                Label_1.Visible = true;
-
-                DownloadBtn.SetPosition(690, 16);
-                DownloadBtn.SetSize(214, 56);
+                DownloadBtn.SetPosition(490, 16);
+                DownloadBtn.SetSize(114, 56);
                 DownloadBtn.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 DownloadBtn.Visible = true;
 
-                download_url.SetPosition(583, 19);
-                download_url.SetSize(360, 56);
+                download_url.SetPosition(383, 19);
+                download_url.SetSize(260, 56);
                 download_url.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 download_url.Visible = true;
+				
+                ScrollPanel_Text.SetPosition(150, 106);
+                ScrollPanel_Text.SetSize(100, 50);
+                ScrollPanel_Text.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                ScrollPanel_Text.Visible = true;
 
-                GridListPanel_1.SetPosition(-16, 0);
-                GridListPanel_1.SetSize(100, 50);
-                GridListPanel_1.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                GridListPanel_1.Visible = true;
+                ContentLabel.SetPosition(181, 96);
+                ContentLabel.SetSize(214, 36);
+                ContentLabel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                ContentLabel.Visible = true;				
+				
+                ListPanel_FileList.SetPosition(-130, 236);
+                ListPanel_FileList.SetSize(854, 400);
+                ListPanel_FileList.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                ListPanel_FileList.Visible = true;
 
                 break;
 
@@ -121,11 +129,6 @@ namespace PSVReaderUI
                 MainWindow.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                 MainWindow.Visible = true;
 
-                Label_1.SetPosition(100, 0);
-                Label_1.SetSize(860, 554);
-                Label_1.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
-                Label_1.Visible = true;
-
                 DownloadBtn.SetPosition(661, 120);
                 DownloadBtn.SetSize(173, 56);
                 DownloadBtn.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
@@ -136,10 +139,20 @@ namespace PSVReaderUI
                 download_url.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 download_url.Visible = true;
 
-                GridListPanel_1.SetPosition(0, 0);
-                GridListPanel_1.SetSize(100, 544);
-                GridListPanel_1.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
-                GridListPanel_1.Visible = true;
+                ScrollPanel_Text.SetPosition(100, 0);
+                ScrollPanel_Text.SetSize(860, 544);
+                ScrollPanel_Text.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
+                ScrollPanel_Text.Visible = true;
+
+                ContentLabel.SetPosition(181, 96);
+                ContentLabel.SetSize(364, 247);
+                ContentLabel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                ContentLabel.Visible = true;
+				
+                ListPanel_FileList.SetPosition(0, 0);
+                ListPanel_FileList.SetSize(100, 544);
+                ListPanel_FileList.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
+                ListPanel_FileList.Visible = true;
 
                 break;
             }
@@ -147,7 +160,6 @@ namespace PSVReaderUI
         }
         public void UpdateLanguage()
         {
-            Label_1.Text = "label";
             DownloadBtn.Text = "Download";
             download_url.Text = "http:\\\\192.186.1.102\\123.txt";
         }
@@ -181,5 +193,22 @@ namespace PSVReaderUI
                 break;
             }
         }
+		
+		private void CustomInit()
+		{
+			DownloadBtn.ButtonAction += HandleButton1ButtonAction;
+			PSVReader.Logic.UpdateStory(ListPanel_FileList);
+		}
+		
+		public void HandleButton1ButtonAction(object sender, TouchEventArgs e)
+		{
+			string url = download_url.Text;
+			PSVReader.Logic.DownloadStory("test", "test", url);
+		}
+		
+		public static void ShowConnect(string content)
+		{
+			ContentLabel.Text = content;
+		}
     }
 }

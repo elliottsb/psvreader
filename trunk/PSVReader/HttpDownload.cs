@@ -26,13 +26,20 @@ namespace PSVReader
 		    streamResponse = null;
 		}
 	}
-		
+	
+	public interface IDownloadComplete
+	{
+		void OnDownloadComplete(object state);
+	}
+	
 	public class HttpDownload
 	{
 		// 用event无法在psv上跑，会死锁。不理解。
 	  	//public static ManualResetEvent allDone= new ManualResetEvent(false);  
 		const int BUFFER_SIZE = 1024;
 		const int DefaultTimeout = 2 * 60 * 1000; // 2 minutes timeout
+		static object state;
+		static IDownloadComplete icb;
 		
 		public enum ConnectEvent:uint
         {
@@ -70,7 +77,7 @@ namespace PSVReader
 			return myRequestState.RawData.ToArray();
 		}
 		
-		public static bool DownloadContent(string url)
+		public static bool DownloadContent(string url, IDownloadComplete iDownCB, object objState)
 		{
 			if (cntEvent != ConnectEvent.Idel)
 			{
@@ -78,6 +85,8 @@ namespace PSVReader
 			}
 			
 			cntEvent = ConnectEvent.Downloading;
+			icb = iDownCB;
+			state = objState;
 			
 	        try 
 			{
@@ -147,8 +156,22 @@ namespace PSVReader
 		{
 			if(cntEvent == ConnectEvent.Finish)
 			{
-				myRequestState.response.Close();
-				cntEvent = ConnectEvent.Idel;				
+				// 异常结束了
+				if (null == myRequestState)
+				{
+					cntEvent = ConnectEvent.Idel;
+				}
+				else
+				{
+					myRequestState.response.Close();
+					cntEvent = ConnectEvent.Idel;
+					
+					// 下载到东西后以回调方式通知
+					if (myRequestState.RawData.Count != 0 && null != icb)
+					{
+						icb.OnDownloadComplete(state);
+					}
+				}
 			}
 		}
 		

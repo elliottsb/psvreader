@@ -44,6 +44,9 @@
     <Compile Include="UICompile\MainFrame.composer.cs" />
     <Compile Include="UICompile\MainFrame.cs" />
     <Compile Include="UICompile\UIStringTable.cs" />
+    <Compile Include="FileDownloadMgr.cs" />
+    <Compile Include="CustomUI\StoryNameList.cs" />
+    <Compile Include="Logic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -54,5 +57,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Pss.CSharp.targets" />
   <ItemGroup>
     <Folder Include="UICompile\" />
+    <Folder Include="CustomUI\" />
   </ItemGroup>
 </Project>
