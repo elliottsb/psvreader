@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace PSVReader
 {
-	public class UIOperator
+	public class Logic
 	{
 		private static string storyName;
 		
-		public UIOperator ()
+		public Logic ()
 		{
 			
 		}
@@ -40,14 +40,15 @@ namespace PSVReader
 			return storyName;
 		}
 		
-		public static void ShowOneStory(string name, string chapter, Label label)
+		public static void ShowOneStory(string name, string chapter)
 		{
 			FileStorage onefile = PSVReader.FileManage.GetStoryChapter(name, chapter);
 			
 			byte[] data = onefile.ReadContent();
 			
 			ASCIIEncoding encoding = new ASCIIEncoding();
-			label.Text = encoding.GetString(data);
+			
+			PSVReaderUI.MainFrame.ShowConnect(encoding.GetString(data));
 		}
 		
 		public static void UpdateStory(PSVReaderUI.StoryNameList list)

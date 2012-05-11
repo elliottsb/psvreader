@@ -31,6 +31,7 @@ namespace PSVReader
 			// Set up the graphics system
 			graphics = new GraphicsContext ();
 			
+			FileManage.StartCheck();
 			// TODO: Create scenes and call UISystem.SetScene
 			// Create scene			
 			UISystem.Initialize(graphics);
@@ -38,23 +39,8 @@ namespace PSVReader
 			MainWnd = new PSVReaderUI.MainFrame();
 			// Set scene
 			UISystem.SetScene(MainWnd, null);
-			
-			HttpDownload.DownloadContent("http://192.168.1.102/1234.txt");		
-			
-			var tmpString = "12321a中文测试";
-
-			UnicodeEncoding encoding = new UnicodeEncoding();    
-			byte[] tmpbyte = encoding.GetBytes(tmpString);
-			
-			PSVReader.FileStorage onefile = new PSVReader.FileStorage("/Application/1.txt");
-			onefile.WriteContent(tmpbyte);
-			
-			tmpString = "223";
-			tmpString = encoding.GetString(onefile.ReadContent());
-			
-			//MainWnd.UpdateText(tmpString);	
 		}
-
+		
 		public static void Update ()
 		{
 			// Query gamepad for current state
@@ -63,22 +49,10 @@ namespace PSVReader
 			// Query touch for current state
             List<TouchData> touchDataList = Touch.GetData (0);
 			
-			//MainWnd.UpdateText("中文测试");
-			
             // Update UI Toolkit
             UISystem.Update(touchDataList);
 			
 			HttpDownload.Update();
-			
-			byte[] byttemp = HttpDownload.GetRawData();
-			
-			if (null != byttemp)
-			{
-				ASCIIEncoding encoding = new ASCIIEncoding();   
-				var tempstring = encoding.GetString(byttemp);
-			
-				//MainWnd.UpdateText(tempstring);			
-			}
 		}
 
 		public static void Render ()
