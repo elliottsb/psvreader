@@ -55,7 +55,10 @@ namespace PSVReaderUI
 			 
 			// ContentLabel
 			ScrollPanel_Text.AddChildLast(ContentLabel);
-			ContentLabel.BackgroundColor = new UIColor(0.7f, 0.5f, 0.5f, 1.0f);
+			ContentLabel.BackgroundColor = new UIColor(0.1f, 0.8f, 0.5f, 1.0f);
+			ContentLabel.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            ContentLabel.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
+            ContentLabel.LineBreak = LineBreak.Character;
 			
             // ListPanel_FileList
             ListPanel_FileList.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
@@ -64,10 +67,10 @@ namespace PSVReaderUI
             // MainWindow
             MainWindow.Clip = true;
             MainWindow.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
-            this.MainWindow.AddChildLast(ScrollPanel_Text);
-            this.MainWindow.AddChildLast(ListPanel_FileList);
             this.MainWindow.AddChildLast(DownloadBtn);
             this.MainWindow.AddChildLast(download_url);
+			this.MainWindow.AddChildLast(ScrollPanel_Text);
+            this.MainWindow.AddChildLast(ListPanel_FileList);
 			
             // Scene
             this.RootWidget.AddChildLast(MainWindow);
