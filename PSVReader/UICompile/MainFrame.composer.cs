@@ -16,6 +16,7 @@ namespace PSVReaderUI
         EditableText download_url;
         ScrollPanel ScrollPanel_Text;
         StoryNameList ListPanel_FileList;
+		Panel contentPanel;
 		static Label ContentLabel;
 
         private void InitializeWidget()
@@ -37,7 +38,8 @@ namespace PSVReaderUI
 			ContentLabel.Name = "ContentLabel";
             ListPanel_FileList = new StoryNameList();
             ListPanel_FileList.Name = "ListPanel_FileList";
-
+			contentPanel = new Panel();
+            contentPanel.Name = "contentPanel";
 
             // DownloadBtn
             DownloadBtn.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -47,18 +49,26 @@ namespace PSVReaderUI
             download_url.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             download_url.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
             download_url.LineBreak = LineBreak.Character;
-
-            // ScrollPanel_Text
-            ScrollPanel_Text.HorizontalScroll = true;
-            ScrollPanel_Text.VerticalScroll = true;
-            ScrollPanel_Text.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
-			 
-			// ContentLabel
-			ScrollPanel_Text.AddChildLast(ContentLabel);
+			
+			// ContentLabel	
 			ContentLabel.BackgroundColor = new UIColor(0.1f, 0.8f, 0.5f, 1.0f);
 			ContentLabel.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             ContentLabel.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
             ContentLabel.LineBreak = LineBreak.Character;
+			
+			// contentPanel
+			contentPanel.AddChildLast(ContentLabel);
+			contentPanel.BackgroundColor = new UIColor(0.8f, 0.8f, 0.5f, 1.0f);
+			
+            // ScrollPanel_Text
+            ScrollPanel_Text.HorizontalScroll = false;
+            ScrollPanel_Text.VerticalScroll = true;
+            ScrollPanel_Text.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
+			ScrollPanel_Text.PanelWidth = 960;
+            ScrollPanel_Text.PanelHeight = 300;
+            ScrollPanel_Text.PanelX = 0;
+            ScrollPanel_Text.PanelY = 0;
+			ScrollPanel_Text.AddChildLast(contentPanel);
 			
             // ListPanel_FileList
             ListPanel_FileList.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
@@ -66,11 +76,11 @@ namespace PSVReaderUI
 			
             // MainWindow
             MainWindow.Clip = true;
-            MainWindow.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
-            this.MainWindow.AddChildLast(DownloadBtn);
-            this.MainWindow.AddChildLast(download_url);
+            MainWindow.BackgroundColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
 			this.MainWindow.AddChildLast(ScrollPanel_Text);
             this.MainWindow.AddChildLast(ListPanel_FileList);
+	        this.MainWindow.AddChildLast(DownloadBtn);
+            this.MainWindow.AddChildLast(download_url);	
 			
             // Scene
             this.RootWidget.AddChildLast(MainWindow);
@@ -106,11 +116,16 @@ namespace PSVReaderUI
                 download_url.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 download_url.Visible = true;
 				
-                ScrollPanel_Text.SetPosition(150, 106);
+                ScrollPanel_Text.SetPosition(50, 106);
                 ScrollPanel_Text.SetSize(100, 50);
                 ScrollPanel_Text.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 ScrollPanel_Text.Visible = true;
 
+                contentPanel.SetPosition(50, 106);
+                contentPanel.SetSize(100, 50);
+                contentPanel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                contentPanel.Visible = true;
+				
                 ContentLabel.SetPosition(181, 96);
                 ContentLabel.SetSize(214, 36);
                 ContentLabel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
@@ -146,8 +161,13 @@ namespace PSVReaderUI
                 ScrollPanel_Text.SetSize(860, 544);
                 ScrollPanel_Text.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                 ScrollPanel_Text.Visible = true;
-
-                ContentLabel.SetPosition(181, 96);
+				
+				contentPanel.SetPosition(100, 106);
+                contentPanel.SetSize(100, 50);
+                contentPanel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                contentPanel.Visible = true;
+				
+                ContentLabel.SetPosition(0, 20);
                 ContentLabel.SetSize(364, 247);
                 ContentLabel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 ContentLabel.Visible = true;
@@ -213,5 +233,33 @@ namespace PSVReaderUI
 		{
 			ContentLabel.Text = content;
 		}
-    }
-}
+		
+		public static int CalcTextRequestHeight(string str, int Width, int charw, int charh, int linegap)
+		{
+			int totalheight = 0;
+			int linewidth = 0;
+			
+			for(int i = 0; i < str.Length; ++i)
+			{
+				if (str[i] == '\r' && str[i+1] == '\n')
+				{
+					totalheight += charh + linegap;
+					
+					i++;
+					
+					continue;
+				}
+				
+				if (linewidth + charw > Width)
+				{
+					totalheight += charh;
+					linewidth = 0;
+				}
+
+				linewidth += charw;
+			}
+			
+			return totalheight;
+		}
+	}
+} 
