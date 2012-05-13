@@ -47,6 +47,7 @@
     <Compile Include="FileDownloadMgr.cs" />
     <Compile Include="CustomUI\StoryNameList.cs" />
     <Compile Include="Logic.cs" />
+    <Compile Include="CustomUI\AutoFixPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

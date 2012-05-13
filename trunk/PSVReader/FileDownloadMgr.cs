@@ -2,7 +2,7 @@ using System;
 
 namespace PSVReader
 {
-	public delegate void DownCmplt(byte[] data, string storyname, string Chaptername);
+	public delegate bool DownCmplt(byte[] data, string storyname, string Chaptername);
 	
 	public class NameUrlPair
 	{
@@ -12,10 +12,10 @@ namespace PSVReader
 	}
 	
 	public class DownloadComplate : PSVReader.IDownloadComplete
-	{ 
-		private event DownCmplt downloadDlgt;
+	{  
+		private static event DownCmplt downloadDlgt;
 		
-		public void ListonDownloadEvent(DownCmplt dlgt)
+		public static void ListonDownloadEvent(DownCmplt dlgt)
 		{
 			downloadDlgt += dlgt;
 		}

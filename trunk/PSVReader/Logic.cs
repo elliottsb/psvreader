@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Sce.Pss.HighLevel.UI;
 using System.Collections.Generic;
-
+using System.IO;
 
 namespace PSVReader
 {
@@ -26,8 +26,7 @@ namespace PSVReader
 		
 		public static void DownloadStory(string name, string chapter, string url)
 		{
-			testSaveFile();
-			//PSVReader.FileDownloadMgr.DownloadStory(name, chapter, url);
+			PSVReader.FileDownloadMgr.DownloadStory(name, chapter, url);
 		}
 
 		public static void SetStoryName(string name)
@@ -46,7 +45,7 @@ namespace PSVReader
 			
 			byte[] data = onefile.ReadContent();
 			
-			ASCIIEncoding encoding = new ASCIIEncoding();
+			UnicodeEncoding encoding = new UnicodeEncoding();
 			
 			PSVReaderUI.MainFrame.ShowConnect(encoding.GetString(data));
 		}
