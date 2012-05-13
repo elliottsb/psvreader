@@ -37,7 +37,7 @@ namespace PSVReader
 		// 用event无法在psv上跑，会死锁。不理解。
 	  	//public static ManualResetEvent allDone= new ManualResetEvent(false);  
 		const int BUFFER_SIZE = 1024;
-		const int DefaultTimeout = 2 * 60 * 1000; // 2 minutes timeout
+		const int DefaultTimeout = 1 * 60 * 1000; // 2 minutes timeout
 		static object state;
 		static IDownloadComplete icb;
 		
@@ -68,6 +68,9 @@ namespace PSVReader
 		
 		public static byte[] GetRawData()
 		{
+			if (null == myRequestState)
+				return null;
+			
 			if(cntEvent == ConnectEvent.Downloading ||
 			   myRequestState.RawData.Count == 0)
 			{
@@ -91,8 +94,7 @@ namespace PSVReader
 	        try 
 			{
 	             // Create a HttpWebrequest object to the desired URL. 
-      			myHttpWebRequest= (HttpWebRequest)WebRequest.Create(url);
-					
+      			myHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 			  	/**
 			    * If you are behind a firewall and you do not have your browser proxy setup
 			    * you need to use the following proxy creation code.
@@ -121,7 +123,7 @@ namespace PSVReader
 					(IAsyncResult) myHttpWebRequest.BeginGetResponse(new AsyncCallback(RespCallback), myRequestState);
 		
 		      	// this line implements the timeout, if there is a timeout, the callback fires and the request becomes aborted
-		      	ThreadPool.RegisterWaitForSingleObject (result.AsyncWaitHandle, new WaitOrTimerCallback(TimeoutCallback), myHttpWebRequest, DefaultTimeout, true);
+		      	//ThreadPool.RegisterWaitForSingleObject (result.AsyncWaitHandle, new WaitOrTimerCallback(TimeoutCallback), myHttpWebRequest, DefaultTimeout, true);
 		
 		      	// The response came in the allowed time. The work processing will happen in the 
 		      	// callback function.

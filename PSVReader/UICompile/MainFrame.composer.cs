@@ -16,8 +16,7 @@ namespace PSVReaderUI
         EditableText download_url;
         ScrollPanel ScrollPanel_Text;
         StoryNameList ListPanel_FileList;
-		Panel contentPanel;
-		static Label ContentLabel;
+		static AutoFixPanel ContentPanel;
 
         private void InitializeWidget()
         {
@@ -34,12 +33,10 @@ namespace PSVReaderUI
             download_url.Name = "download_url";
             ScrollPanel_Text = new ScrollPanel();
             ScrollPanel_Text.Name = "ScrollPanel_Text";
-			ContentLabel = new Label();
-			ContentLabel.Name = "ContentLabel";
+			ContentPanel = new AutoFixPanel();
+			ContentPanel.Name = "ContentPanel";
             ListPanel_FileList = new StoryNameList();
             ListPanel_FileList.Name = "ListPanel_FileList";
-			contentPanel = new Panel();
-            contentPanel.Name = "contentPanel";
 
             // DownloadBtn
             DownloadBtn.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -49,27 +46,7 @@ namespace PSVReaderUI
             download_url.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             download_url.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
             download_url.LineBreak = LineBreak.Character;
-			
-			// ContentLabel	
-			ContentLabel.BackgroundColor = new UIColor(0.1f, 0.8f, 0.5f, 1.0f);
-			ContentLabel.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            ContentLabel.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
-            ContentLabel.LineBreak = LineBreak.Character;
-			
-			// contentPanel
-			contentPanel.AddChildLast(ContentLabel);
-			contentPanel.BackgroundColor = new UIColor(0.8f, 0.8f, 0.5f, 1.0f);
-			
-            // ScrollPanel_Text
-            ScrollPanel_Text.HorizontalScroll = false;
-            ScrollPanel_Text.VerticalScroll = true;
-            ScrollPanel_Text.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
-			ScrollPanel_Text.PanelWidth = 960;
-            ScrollPanel_Text.PanelHeight = 300;
-            ScrollPanel_Text.PanelX = 0;
-            ScrollPanel_Text.PanelY = 0;
-			ScrollPanel_Text.AddChildLast(contentPanel);
-			
+
             // ListPanel_FileList
             ListPanel_FileList.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
 			ListPanel_FileList.BackgroundColor = new UIColor(0.12f, 0.12f, 0.12f, 1.0f);			
@@ -77,7 +54,7 @@ namespace PSVReaderUI
             // MainWindow
             MainWindow.Clip = true;
             MainWindow.BackgroundColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-			this.MainWindow.AddChildLast(ScrollPanel_Text);
+			this.MainWindow.AddChildLast(ContentPanel);
             this.MainWindow.AddChildLast(ListPanel_FileList);
 	        this.MainWindow.AddChildLast(DownloadBtn);
             this.MainWindow.AddChildLast(download_url);	
@@ -116,20 +93,11 @@ namespace PSVReaderUI
                 download_url.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 download_url.Visible = true;
 				
-                ScrollPanel_Text.SetPosition(50, 106);
-                ScrollPanel_Text.SetSize(100, 50);
-                ScrollPanel_Text.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                ScrollPanel_Text.Visible = true;
-
-                contentPanel.SetPosition(50, 106);
-                contentPanel.SetSize(100, 50);
-                contentPanel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                contentPanel.Visible = true;
-				
-                ContentLabel.SetPosition(181, 96);
-                ContentLabel.SetSize(214, 36);
-                ContentLabel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                ContentLabel.Visible = true;				
+                ContentPanel.SetPosition(50, 106);
+                ContentPanel.SetSize(100, 500);
+                ContentPanel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                ContentPanel.Visible = true;
+				ContentPanel.SetWidgetLayout(orientation);
 				
                 ListPanel_FileList.SetPosition(-130, 236);
                 ListPanel_FileList.SetSize(854, 400);
@@ -157,20 +125,11 @@ namespace PSVReaderUI
                 download_url.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 download_url.Visible = true;
 
-                ScrollPanel_Text.SetPosition(100, 0);
-                ScrollPanel_Text.SetSize(860, 544);
-                ScrollPanel_Text.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
-                ScrollPanel_Text.Visible = true;
-				
-				contentPanel.SetPosition(100, 106);
-                contentPanel.SetSize(100, 50);
-                contentPanel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                contentPanel.Visible = true;
-				
-                ContentLabel.SetPosition(0, 20);
-                ContentLabel.SetSize(364, 247);
-                ContentLabel.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                ContentLabel.Visible = true;
+                ContentPanel.SetPosition(100, 0);
+                ContentPanel.SetSize(860, 544);
+                ContentPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
+                ContentPanel.Visible = true;
+				ContentPanel.SetWidgetLayout(orientation);
 				
                 ListPanel_FileList.SetPosition(0, 0);
                 ListPanel_FileList.SetSize(100, 544);
@@ -184,7 +143,7 @@ namespace PSVReaderUI
         public void UpdateLanguage()
         {
             DownloadBtn.Text = "Download";
-            download_url.Text = "http:\\\\192.186.1.102\\123.txt";
+            download_url.Text = "http://192.168.1.102/123.txt";
         }
         private void onShowing(object sender, EventArgs e)
         {
@@ -226,40 +185,13 @@ namespace PSVReaderUI
 		public void HandleButton1ButtonAction(object sender, TouchEventArgs e)
 		{
 			string url = download_url.Text;
-			PSVReader.Logic.DownloadStory("test", "test", url);
+			PSVReader.Logic.DownloadStory("test", "testChapter", url);
 		}
 		
 		public static void ShowConnect(string content)
 		{
-			ContentLabel.Text = content;
-		}
-		
-		public static int CalcTextRequestHeight(string str, int Width, int charw, int charh, int linegap)
-		{
-			int totalheight = 0;
-			int linewidth = 0;
-			
-			for(int i = 0; i < str.Length; ++i)
-			{
-				if (str[i] == '\r' && str[i+1] == '\n')
-				{
-					totalheight += charh + linegap;
-					
-					i++;
-					
-					continue;
-				}
-				
-				if (linewidth + charw > Width)
-				{
-					totalheight += charh;
-					linewidth = 0;
-				}
-
-				linewidth += charw;
-			}
-			
-			return totalheight;
+			ContentPanel.Text = content;
+			ContentPanel.ResetSizeBycontent();
 		}
 	}
 } 
