@@ -37,6 +37,7 @@ namespace PSVReader
 			UISystem.Initialize(graphics);
 			
 			MainWnd = new PSVReaderUI.MainFrame();
+			
 			// Set scene
 			UISystem.SetScene(MainWnd, null);
 		}

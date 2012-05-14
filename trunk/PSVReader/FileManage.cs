@@ -92,6 +92,11 @@ namespace PSVReader
 		
 		public static bool SaveFile(byte[] data, string name, string chapter)
 		{
+			if (data == null)
+			{
+				return false;
+			}
+			
 			if (CheckFileExsit(name, chapter))
 			{
 				return false;

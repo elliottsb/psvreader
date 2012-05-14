@@ -48,6 +48,15 @@
     <Compile Include="CustomUI\StoryNameList.cs" />
     <Compile Include="Logic.cs" />
     <Compile Include="CustomUI\AutoFixPanel.cs" />
+    <Compile Include="CustomUI\CUIMainFrame.cs" />
+    <Compile Include="UICompile\DownloadUI.composer.cs" />
+    <Compile Include="UICompile\DownloadUI.cs" />
+    <Compile Include="UICompile\ReadScollPanel.composer.cs" />
+    <Compile Include="UICompile\ReadScollPanel.cs" />
+    <Compile Include="CustomUI\CUIStoryNameListItem.cs" />
+    <Compile Include="UICompile\StoryNameListItem.composer.cs" />
+    <Compile Include="UICompile\StoryNameListItem.cs" />
+    <Compile Include="CustomUI\CUIDownload.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

@@ -37,15 +37,19 @@ namespace PSVReader
 		// 用event无法在psv上跑，会死锁。不理解。
 	  	//public static ManualResetEvent allDone= new ManualResetEvent(false);  
 		const int BUFFER_SIZE = 1024;
-		const int DefaultTimeout = 1 * 60 * 1000; // 2 minutes timeout
+		const int DefaultTimeout = 2 * 60; // 2 minutes timeout
 		static object state;
 		static IDownloadComplete icb;
+		static System.DateTime startTime;
 		
 		public enum ConnectEvent:uint
         {
             Idel=0,
-            Downloading=1,
-            Finish=2,
+			DownloadWaiting=1,
+            Downloading=2,
+            Finish=3,
+			ErrorEnding=4,
+			TimeOut=5,
         }
 		private static ConnectEvent cntEvent = ConnectEvent.Idel;
 		private static HttpWebRequest myHttpWebRequest;
@@ -53,16 +57,32 @@ namespace PSVReader
 			
 		public HttpDownload ()
 		{
+			startTime = new System.DateTime();
+		}
+		
+		private static void SetState(ConnectEvent errcode)
+		{
+			cntEvent = errcode;
+			
+			if (errcode == ConnectEvent.DownloadWaiting)
+			{
+				startTime = System.DateTime.Now;
+			}
+		}
+		
+		private static bool IsState(ConnectEvent Cnntevent)
+		{
+			return cntEvent == Cnntevent;
 		}
 		
 		// Abort the request if the timer fires.
-	  	private static void TimeoutCallback(object state, bool timedOut) { 
+	  	private static void DoOnTimeout(object state, bool timedOut) { 
 	      	if (timedOut) {
 	          	HttpWebRequest request = state as HttpWebRequest;
 	          	if (request != null) {
 	              	request.Abort();
-					cntEvent = ConnectEvent.Finish;
 	        	}
+				SetState(ConnectEvent.TimeOut);
 	      	}
 		}
 		
@@ -87,7 +107,7 @@ namespace PSVReader
 				return false;
 			}
 			
-			cntEvent = ConnectEvent.Downloading;
+			SetState(ConnectEvent.DownloadWaiting);
 			icb = iDownCB;
 			state = objState;
 			
@@ -135,45 +155,44 @@ namespace PSVReader
 		    }
 		    catch(WebException e)
 		    {
-		      	Console.WriteLine("\nMain Exception raised!");
-		      	Console.WriteLine("\nMessage:{0}",e.Message);
-		      	Console.WriteLine("\nStatus:{0}",e.Status);
-		      	Console.WriteLine("Press any key to continue..........");
-				cntEvent = ConnectEvent.Finish;
+				SetState(ConnectEvent.ErrorEnding);
 		    }
 		    catch(Exception e)
 		    {
-		      	Console.WriteLine("\nMain Exception raised!");
-		      	Console.WriteLine("Source :{0} " , e.Source);
-		      	Console.WriteLine("Message :{0} " , e.Message);
-		      	Console.WriteLine("Press any key to continue..........");
-		      	Console.Read();
-				cntEvent = ConnectEvent.Finish;
+				SetState(ConnectEvent.ErrorEnding);
 		    }
-	
+			
 	        return true;			
 		}
 		
 		public static void Update()
 		{
-			if(cntEvent == ConnectEvent.Finish)
+			if(IsState(ConnectEvent.DownloadWaiting))
 			{
-				// 异常结束了
-				if (null == myRequestState)
-				{
-					cntEvent = ConnectEvent.Idel;
-				}
-				else
-				{
-					myRequestState.response.Close();
-					cntEvent = ConnectEvent.Idel;
+				if (null == startTime)
+					SetState(ConnectEvent.ErrorEnding);
+				
+				TimeSpan ts = System.DateTime.Now - startTime;
+				if (ts.Seconds > DefaultTimeout)
+					DoOnTimeout(myHttpWebRequest, true);
+			}
+			
+			if(IsState(ConnectEvent.Finish))
+			{
+				myRequestState.response.Close();
+				cntEvent = ConnectEvent.Idel;
 					
-					// 下载到东西后以回调方式通知
-					if (myRequestState.RawData.Count != 0 && null != icb)
-					{
-						icb.OnDownloadComplete(state);
-					}
+				// 下载到东西后以回调方式通知
+				if (myRequestState.RawData.Count != 0 && null != icb)
+				{
+					icb.OnDownloadComplete(state);
 				}
+			}
+			
+			if (IsState(ConnectEvent.ErrorEnding) ||
+			    IsState(ConnectEvent.TimeOut))
+			{
+				SetState(ConnectEvent.Idel);
 			}
 		}
 		
@@ -181,6 +200,8 @@ namespace PSVReader
 		{
 		    try
 		    {
+				SetState(ConnectEvent.Downloading);
+				
 		      	// State of request is asynchronous.
 		      	RequestState myRequestState=(RequestState) asynchronousResult.AsyncState;
 		      	HttpWebRequest  myHttpWebRequest=myRequestState.request;
@@ -234,7 +255,7 @@ namespace PSVReader
 		      		}*/
 					//myRequestState.RawData[0] = myRequestState.RawData[0];
 		      		responseStream.Close();					
-					cntEvent = ConnectEvent.Finish;
+					SetState(ConnectEvent.Finish);
 		   		}
 		    }
 		    catch(WebException e)
