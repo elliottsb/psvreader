@@ -12,11 +12,10 @@ namespace PSVReaderUI
     partial class MainFrame
     {
         Panel MainWindow;
-        Button DownloadBtn;
-        EditableText download_url;
-        ScrollPanel ScrollPanel_Text;
         StoryNameList ListPanel_FileList;
-		static AutoFixPanel ContentPanel;
+		static ReadScollPanel ContentPanel;
+		Button Button_DelAll;
+        Button Add_New;
 
         private void InitializeWidget()
         {
@@ -27,39 +26,35 @@ namespace PSVReaderUI
         {
             MainWindow = new Panel();
             MainWindow.Name = "MainWindow";
-            DownloadBtn = new Button();
-            DownloadBtn.Name = "DownloadBtn";
-            download_url = new EditableText();
-            download_url.Name = "download_url";
-            ScrollPanel_Text = new ScrollPanel();
-            ScrollPanel_Text.Name = "ScrollPanel_Text";
-			ContentPanel = new AutoFixPanel();
-			ContentPanel.Name = "ContentPanel";
             ListPanel_FileList = new StoryNameList();
             ListPanel_FileList.Name = "ListPanel_FileList";
-
-            // DownloadBtn
-            DownloadBtn.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            DownloadBtn.TextFont = new Font( FontAlias.System, 25, FontStyle.Regular);			
+            Button_DelAll = new Button();
+            Button_DelAll.Name = "Button_DelAll";
+            Add_New = new Button();
+            Add_New.Name = "Add_New";
+			ContentPanel = new ReadScollPanel();
+			ContentPanel.Name = "ContentPanel";
 			
-            // download_url
-            download_url.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            download_url.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
-            download_url.LineBreak = LineBreak.Character;
-
             // ListPanel_FileList
             ListPanel_FileList.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
-			ListPanel_FileList.BackgroundColor = new UIColor(0.12f, 0.12f, 0.12f, 1.0f);			
+        	ListPanel_FileList.BackgroundColor = new UIColor(200f / 255f, 153f / 255f, 100f / 255f, 255f / 255f);
 			
+			// Button_DelAll
+            Button_DelAll.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            Button_DelAll.TextFont = new Font( FontAlias.System, 25, FontStyle.Regular);
+
+            // Add_New
+            Add_New.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            Add_New.TextFont = new Font( FontAlias.System, 25, FontStyle.Regular);
             // MainWindow
             MainWindow.Clip = true;
-            MainWindow.BackgroundColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-			this.MainWindow.AddChildLast(ContentPanel);
-            this.MainWindow.AddChildLast(ListPanel_FileList);
-	        this.MainWindow.AddChildLast(DownloadBtn);
-            this.MainWindow.AddChildLast(download_url);	
-			
-            // Scene
+            MainWindow.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+			this.MainWindow.AddChildLast(ListPanel_FileList);
+	        this.MainWindow.AddChildLast(ContentPanel);
+			this.MainWindow.AddChildLast(Button_DelAll);
+			this.MainWindow.AddChildLast(Add_New);
+
+            // Scen
             this.RootWidget.AddChildLast(MainWindow);
 
             SetWidgetLayout(orientation);
@@ -82,16 +77,6 @@ namespace PSVReaderUI
                 MainWindow.SetSize(100, 100);
                 MainWindow.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 MainWindow.Visible = true;
-
-                DownloadBtn.SetPosition(490, 16);
-                DownloadBtn.SetSize(114, 56);
-                DownloadBtn.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                DownloadBtn.Visible = true;
-
-                download_url.SetPosition(383, 19);
-                download_url.SetSize(260, 56);
-                download_url.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                download_url.Visible = true;
 				
                 ContentPanel.SetPosition(50, 106);
                 ContentPanel.SetSize(100, 500);
@@ -104,6 +89,16 @@ namespace PSVReaderUI
                 ListPanel_FileList.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 ListPanel_FileList.Visible = true;
 
+                Button_DelAll.SetPosition(-62, 467);
+                Button_DelAll.SetSize(214, 56);
+                Button_DelAll.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                Button_DelAll.Visible = true;
+
+                Add_New.SetPosition(-62, 467);
+                Add_New.SetSize(214, 56);
+                Add_New.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                Add_New.Visible = true;
+
                 break;
 
             default:
@@ -115,16 +110,6 @@ namespace PSVReaderUI
                 MainWindow.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                 MainWindow.Visible = true;
 
-                DownloadBtn.SetPosition(661, 120);
-                DownloadBtn.SetSize(173, 56);
-                DownloadBtn.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                DownloadBtn.Visible = true;
-
-                download_url.SetPosition(546, 40);
-                download_url.SetSize(360, 56);
-                download_url.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
-                download_url.Visible = true;
-
                 ContentPanel.SetPosition(100, 0);
                 ContentPanel.SetSize(860, 544);
                 ContentPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
@@ -132,18 +117,27 @@ namespace PSVReaderUI
 				ContentPanel.SetWidgetLayout(orientation);
 				
                 ListPanel_FileList.SetPosition(0, 0);
-                ListPanel_FileList.SetSize(100, 544);
+                ListPanel_FileList.SetSize(100, 432);
                 ListPanel_FileList.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                 ListPanel_FileList.Visible = true;
 
+                Button_DelAll.SetPosition(0, 388);
+                Button_DelAll.SetSize(100, 56);
+                Button_DelAll.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                Button_DelAll.Visible = true;
+
+                Add_New.SetPosition(0, 332);
+                Add_New.SetSize(100, 56);
+                Add_New.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
+                Add_New.Visible = true;
                 break;
             }
             _currentLayoutOrientation = orientation;
         }
         public void UpdateLanguage()
         {
-            DownloadBtn.Text = "Download";
-            download_url.Text = "http://192.168.1.102/123.txt";
+            Button_DelAll.Text = "删除";
+            Add_New.Text = "添加";
         }
         private void onShowing(object sender, EventArgs e)
         {
@@ -175,23 +169,5 @@ namespace PSVReaderUI
                 break;
             }
         }
-		
-		private void CustomInit()
-		{
-			DownloadBtn.ButtonAction += HandleButton1ButtonAction;
-			PSVReader.Logic.UpdateStory(ListPanel_FileList);
-		}
-		
-		public void HandleButton1ButtonAction(object sender, TouchEventArgs e)
-		{
-			string url = download_url.Text;
-			PSVReader.Logic.DownloadStory("test", "testChapter", url);
-		}
-		
-		public static void ShowConnect(string content)
-		{
-			ContentPanel.Text = content;
-			ContentPanel.ResetSizeBycontent();
-		}
 	}
 } 

@@ -7,12 +7,20 @@ using System.IO;
 namespace PSVReader
 {
 	public class Logic
-	{
-		private static string storyName;
-		
+	{	
 		public Logic ()
 		{
 			
+		}
+		
+		public static void DelAllStory()
+		{
+			List<string> listName = PSVReader.FileManage.GetAllStoryName();	
+			
+			foreach(string name in listName)
+			{
+				PSVReader.FileManage.DeleteStory(name);
+			}
 		}
 		
 		public static void testSaveFile()
@@ -21,22 +29,12 @@ namespace PSVReader
 			
 			ASCIIEncoding encode = new ASCIIEncoding();
 			
-			PSVReader.FileManage.SaveFile(encode.GetBytes(tempstr), "file1", "chapter1");
+			PSVReader.FileManage.SaveFile(encode.GetBytes(tempstr), "file1", "chapter2");
 		}
 		
 		public static void DownloadStory(string name, string chapter, string url)
 		{
 			PSVReader.FileDownloadMgr.DownloadStory(name, chapter, url);
-		}
-
-		public static void SetStoryName(string name)
-		{
-			storyName = name;
-		}
-		
-		public static string GetStroyName()
-		{
-			return storyName;
 		}
 		
 		public static void ShowOneStory(string name, string chapter)
@@ -54,6 +52,7 @@ namespace PSVReader
 		{
 			List<string> names = FileManage.GetAllStoryName();
 			
+			list.ClearBook();
 			foreach (string na in names)
 			{
 				List<string> chapterName = FileManage.GetStory(na);
