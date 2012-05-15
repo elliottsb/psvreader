@@ -200,6 +200,11 @@ namespace PSVReader
 		{
 		    try
 		    {
+				if (!IsState(ConnectEvent.DownloadWaiting))
+				{
+					return;
+				}
+				
 				SetState(ConnectEvent.Downloading);
 				
 		      	// State of request is asynchronous.
