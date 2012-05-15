@@ -27,7 +27,7 @@ namespace PSVReader
 		{	
 			string tempstr = "this is test string";
 			
-			ASCIIEncoding encode = new ASCIIEncoding();
+			UnicodeEncoding encode = new UnicodeEncoding();
 			
 			PSVReader.FileManage.SaveFile(encode.GetBytes(tempstr), "file1", "chapter2");
 		}
@@ -43,9 +43,9 @@ namespace PSVReader
 			
 			byte[] data = onefile.ReadContent();
 			
-			UnicodeEncoding encoding = new UnicodeEncoding();
+			//UnicodeEncoding encoding = new UnicodeEncoding();
 			
-			PSVReaderUI.MainFrame.ShowConnect(encoding.GetString(data));
+			PSVReaderUI.MainFrame.ShowConnect(Encoding.Unicode.GetString(data));
 		}
 		
 		public static void UpdateStory(PSVReaderUI.StoryNameList list)
