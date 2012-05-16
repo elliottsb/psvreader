@@ -39,7 +39,7 @@ namespace PSVReaderUI
 			// ContentLabel	
 			ContentLabel.BackgroundColor = new UIColor(0.1f, 0.8f, 0.5f, 1.0f);
 			ContentLabel.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            ContentLabel.Font = new Font( FontAlias.System, 25, FontStyle.Regular);
+            ContentLabel.Font = new Font(FontAlias.System, 25, FontStyle.Regular);
             ContentLabel.LineBreak = LineBreak.Character;
 			ContentLabel.HorizontalAlignment = HorizontalAlignment.Left;
 			ContentLabel.VerticalAlignment = VerticalAlignment.Top;
