@@ -37,7 +37,7 @@ namespace PSVReaderUI
 			ContentLabel.Name = "ContentLabel";
 			
 			// ContentLabel	
-			ContentLabel.BackgroundColor = new UIColor(0.1f, 0.8f, 0.5f, 1.0f);
+			ContentLabel.BackgroundColor = new UIColor(0.5f, 0.8f, 0.5f, 1.0f);
 			ContentLabel.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             ContentLabel.Font = new Font(FontAlias.System, 25, FontStyle.Regular);
             ContentLabel.LineBreak = LineBreak.Character;
@@ -57,7 +57,7 @@ namespace PSVReaderUI
 		
 		public void ResetSizeBycontent()
 		{
-			ContentLabel.SetSize(this.Width, ContentLabel.TextHeight);
+			ContentLabel.SetSize(this.Width, Math.Min(ContentLabel.TextHeight, 1000.0f));
 			this.PanelWidth = ContentLabel.Width;
 			this.PanelHeight = ContentLabel.Height;
 		}

@@ -29,7 +29,7 @@ namespace PSVReader
 			
 			UnicodeEncoding encode = new UnicodeEncoding();
 			
-			PSVReader.FileManage.SaveFile(encode.GetBytes(tempstr), "file1", "chapter2");
+			PSVReader.FileManage.SaveFile(encode.GetBytes(tempstr), "file3", "chapter2");
 		}
 		
 		public static void DownloadStory(string name, string chapter, string url)
