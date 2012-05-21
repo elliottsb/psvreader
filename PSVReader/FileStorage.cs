@@ -61,21 +61,51 @@ namespace PSVReader
 			                                        pathname.Length - pathname.LastIndexOf('/'));
 			
 			filename = pathname + chaptername + ".txt";
-			cfgfilename = pathname + chaptername + ".cfg";
-			
-			preparefile();
+			cfgfilename = pathname + chaptername + ".cfg";		
 		}
 		
-		private void preparefile()
+		private bool CheckFileState()
 		{
+			if (false == System.IO.Directory.Exists(pathname))
+			{
+				return false;
+			}
+			
 			if (false == System.IO.File.Exists(filename))
 			{
-				System.IO.File.Create(filename).Close();
+				return false;
 			}
 			
 			if (false == System.IO.File.Exists(cfgfilename))
 			{
-				System.IO.File.Create(cfgfilename).Close();
+				return false;
+			}
+			
+			return true;
+		}
+		
+		private void preparefile()
+		{
+			try
+			{
+				if (false == System.IO.Directory.Exists(pathname))
+				{
+					System.IO.Directory.CreateDirectory(pathname);
+				}
+				
+				if (false == System.IO.File.Exists(filename))
+				{
+					System.IO.File.Create(filename).Close();
+				}
+			
+				if (false == System.IO.File.Exists(cfgfilename))
+				{
+					System.IO.File.Create(cfgfilename).Close();
+				}				
+			}
+			catch (IOException e)
+			{			
+				//Console.OpenStandardError().Write(e.Message.ToCharArray(), 0, e.Message.Length);
 			}
 		}
 		
@@ -91,7 +121,10 @@ namespace PSVReader
 		
 		public void SaveLastReadSign()
 		{
-			
+			if (false == CheckFileState())
+			{
+				preparefile();
+			}			
 		}
 		
 		public string GetEncodingType()
@@ -101,6 +134,11 @@ namespace PSVReader
 		
 		public void WriteContent(byte[] data)
 		{
+			if (false == CheckFileState())
+			{
+				preparefile();
+			}
+			
 			FileOpHelper.WriteContent(data, filename);
 		}
 	}

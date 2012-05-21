@@ -40,8 +40,8 @@ namespace PSVReaderUI
 		
 		public void HandleAddNewButtonAction(object sender, TouchEventArgs e)
 		{
-			PSVReader.Logic.testSaveFile();
-			//PSVReader.Logic.DownloadStory("test", "testchp1", "http://192.168.1.102/123.txt");
+			//PSVReader.Logic.testSaveFile();
+			PSVReader.Logic.DownloadStory("test", "testchp1", "http://192.168.1.102/123.txt");
 		}
 		
 		public bool DownloadStoryComplete(byte[] data, string storyname, string Chaptername)

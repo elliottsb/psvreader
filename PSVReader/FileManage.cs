@@ -104,15 +104,10 @@ namespace PSVReader
 			
 			string dstDirName = BaseFolder + name + "/" + chapter;
 			
-			if (false == System.IO.Directory.Exists(dstDirName))
-			{
-				System.IO.Directory.CreateDirectory(dstDirName);
-			}
-			
 			FileStorage newFile = new FileStorage(dstDirName);
 			newFile.WriteContent(data);
 			
-			return false;
+			return true;
 		}	
 	}
 }

@@ -45,22 +45,22 @@ namespace PSVReaderUI
             switch (orientation)
             {
             case LayoutOrientation.Vertical:
-                this.SetSize(50, 100);
+                this.SetSize(50, 200);
                 this.Anchors = Anchors.None;
 
                 Label_Story.SetPosition(-86, 0);
-                Label_Story.SetSize(214, 36);
+                Label_Story.SetSize(100, 36);
                 Label_Story.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 Label_Story.Visible = true;
 
                 break;
 
             default:
-                this.SetSize(100, 50);
+                this.SetSize(200, 50);
                 this.Anchors = Anchors.None;
 
                 Label_Story.SetPosition(8, 7);
-                Label_Story.SetSize(84, 35);
+                Label_Story.SetSize(200, 35);
                 Label_Story.Anchors = Anchors.Top | Anchors.Height | Anchors.Left | Anchors.Width;
                 Label_Story.Visible = true;
 
