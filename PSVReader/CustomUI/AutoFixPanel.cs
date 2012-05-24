@@ -49,7 +49,7 @@ namespace PSVReaderUI
             this.VerticalScroll = true;
             this.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
 			this.PanelWidth = 960;
-            this.PanelHeight = 500;
+            this.PanelHeight = 20000;
             this.PanelX = 0;
             this.PanelY = 0;
 			this.AddChildLast(ContentLabel);
@@ -57,9 +57,9 @@ namespace PSVReaderUI
 		
 		public void ResetSizeBycontent()
 		{
-			ContentLabel.SetSize(this.Width, Math.Min(ContentLabel.TextHeight, 1000.0f));
 			this.PanelWidth = ContentLabel.Width;
 			this.PanelHeight = ContentLabel.Height;
+			ContentLabel.SetSize(this.Width, ContentLabel.TextHeight);
 		}
 		
 		private LayoutOrientation _currentLayoutOrientation;
