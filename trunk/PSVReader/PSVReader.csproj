@@ -57,7 +57,9 @@
     <Compile Include="UICompile\StoryNameListItem.composer.cs" />
     <Compile Include="UICompile\StoryNameListItem.cs" />
     <Compile Include="CustomUI\CUIDownload.cs" />
-    <Compile Include="CustomUI\ReadPanel.cs" />
+    <Compile Include="CustomUI\StreamPagePanel.cs" />
+    <Compile Include="ReadContentStream.cs" />
+    <Compile Include="CustomUI\StreamContainerWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
