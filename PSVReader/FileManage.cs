@@ -19,18 +19,14 @@ namespace PSVReader
 	public class FileManage
 	{
 		private const string BaseFolder = "/Application/PSVReader/";
-		private static DownCmplt downAct;
 		
-		public static void Init()
+		public FileManage()
 		{
-			downAct = new DownCmplt(SaveFile);
-			DownloadComplate.ListonDownloadEvent(downAct);
+
 		}
 		
-		public static void StartCheck()
-		{
-			Init();
-			
+		public static void Init()
+		{		
 			if (!System.IO.Directory.Exists(BaseFolder))
 			{
 				System.IO.Directory.CreateDirectory(BaseFolder);	

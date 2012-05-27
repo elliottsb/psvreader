@@ -69,18 +69,20 @@ namespace PSVReaderUI
 			
 			foreach (TouchEvent th in touchEvents)
 			{
-				Widget tmpWidget = th.Source;
-				while (null != tmpWidget)
+				if (th.Type == TouchEventType.Up)
 				{
-					if (tmpWidget is StoryNameListItem)
+					Widget tmpWidget = th.Source;
+					while (null != tmpWidget)
 					{
-						StoryNameListItem item = tmpWidget as StoryNameListItem;
-						PSVReader.Logic.ShowOneStory(item.Story, item.Text);
-						
-						break;
+						if (tmpWidget is StoryNameListItem)
+						{
+							StoryNameListItem item = tmpWidget as StoryNameListItem;
+							PSVReader.Logic.ShowOneStory(item.Story, item.Text);
+							
+							break;
+						}
+						tmpWidget = tmpWidget.Parent;
 					}
-					
-					tmpWidget = tmpWidget.Parent;
 				}
 			}
 		}

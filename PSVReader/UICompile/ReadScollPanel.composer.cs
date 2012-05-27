@@ -11,17 +11,13 @@ namespace PSVReaderUI
 {
     partial class ReadScollPanel
     {
-        AutoFixPanel ScrollPanel_Text;
+        StreamPagePanel ScrollPanel_Text;
 		
-		public string Text
+		public PSVReader.ReadContentStream ContentStrm
         {
-            get
-            {
-                return ScrollPanel_Text.Text;
-            }
             set
             {
-                ScrollPanel_Text.Text = value;
+                ScrollPanel_Text.ContentStrm = value;
             }
         }
 		
@@ -32,13 +28,8 @@ namespace PSVReaderUI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
-            ScrollPanel_Text = new AutoFixPanel();
+            ScrollPanel_Text = new StreamPagePanel();
             ScrollPanel_Text.Name = "ScrollPanel_Text";
-
-            // ScrollPanel_Text
-            ScrollPanel_Text.HorizontalScroll = true;
-            ScrollPanel_Text.VerticalScroll = true;
-            ScrollPanel_Text.ScrollBarVisibility = ScrollBarVisibility.ScrollableVisible;
 
             // ReadScollPanel
             this.BackgroundColor = new UIColor(153f / 255f, 100f / 255f, 153f / 255f, 255f / 255f);

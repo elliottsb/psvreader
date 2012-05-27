@@ -13,7 +13,7 @@ namespace PSVReaderUI
     {
         Panel MainWindow;
         StoryNameList ListPanel_FileList;
-		static ReadScollPanel ContentPanel;
+		ReadScollPanel ContentPanel;
 		Button Button_DelAll;
         Button Add_New;
 

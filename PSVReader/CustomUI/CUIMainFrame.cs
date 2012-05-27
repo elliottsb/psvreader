@@ -12,10 +12,11 @@ namespace PSVReaderUI
     partial class MainFrame
     {
 		PSVReader.DownCmplt dmpt;
+		PSVReader.UINoitfy.DlgtShowOneStory dlgtShow;
 		
-		public static void ShowConnect(string content)
+		public void ShowConnect(PSVReader.ReadContentStream content)
 		{
-			ContentPanel.Text = content;
+			ContentPanel.ContentStrm = content;
 		}
 		
 		public void UpdateStoryList()
@@ -30,6 +31,9 @@ namespace PSVReaderUI
 			Add_New.ButtonAction += HandleAddNewButtonAction;
 			dmpt = new PSVReader.DownCmplt(DownloadStoryComplete);
 			PSVReader.DownloadComplate.ListonDownloadEvent(dmpt);
+			
+			dlgtShow = new PSVReader.UINoitfy.DlgtShowOneStory(ShowConnect);
+			PSVReader.UINoitfy.ListenOnShowOneStory(dlgtShow);
 		}
 		
 		public void HandleDelAllButtonAction(object sender, TouchEventArgs e)
