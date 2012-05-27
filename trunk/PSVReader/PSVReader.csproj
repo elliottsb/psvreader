@@ -60,6 +60,7 @@
     <Compile Include="CustomUI\StreamPagePanel.cs" />
     <Compile Include="ReadContentStream.cs" />
     <Compile Include="CustomUI\StreamContainerWidget.cs" />
+    <Compile Include="CustomUI\StreamPageLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

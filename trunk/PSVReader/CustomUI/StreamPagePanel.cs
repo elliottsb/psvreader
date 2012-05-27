@@ -36,7 +36,7 @@ namespace PSVReaderUI
 			set
 			{
 				contentStrm = value;
-				InitData();
+				ResetData();
 			}
 		}
 		
@@ -269,26 +269,31 @@ namespace PSVReaderUI
 				this.panelList [i].Visible = (i == num3 || i == num3 + 1);
 			}
 		}
-		public void InitData ()
+		
+		public void PrepareSurroundPage(int baseIndex)
 		{
-			Label newLabel = CreateOneCompetibleLabel();
+			// 按照先添加后面再添加前面的页面可以避免index的错误
+			this.PrepareNextPage(baseIndex);
+			this.PreparePrevPage(baseIndex);			
+		}
+		
+		public void ResetData ()
+		{	
+			for (int i = this.pageCount - 1; i >= 0; --i)
+			{
+				this.RemovePageAt(i);
+			}
 			
+			StreamPageLabel newLabel = InsertOnePageAt(0);
 			string content = contentStrm.GetThisPage(newLabel);
-			
 			newLabel.Text = content;
-			
-			this.AddPage();
-			this.GetPage(0).AddChildLast(newLabel);
-			
-			this.PrepareNextPage();
-			this.PreparePrevPage();
+
+			contentStrm.UpdateLocation(0, content.Length);
+			PrepareSurroundPage(0);
 		}
 		
 		public void ScrollTo (int index, bool withAnimation)
-		{
-			PrepareNextPage();
-			PreparePrevPage();
-			
+		{	
 			if (index >= this.pageCount)
 			{
 				index = this.pageCount - 1;
@@ -300,6 +305,19 @@ namespace PSVReaderUI
 					index = 0;
 				}
 			}
+			// 放在这里会影响动画的效率和流畅度，后续再改
+			foreach (Widget w in this.GetPage(index).Children)
+			{
+				if (w is StreamPageLabel)
+				{
+					StreamPageLabel st = w as StreamPageLabel;
+					
+					contentStrm.UpdateLocation(st.ContentIndex, st.ContentLenth);
+					
+					PrepareSurroundPage(index);
+				}
+			}
+			
 			if (withAnimation)
 			{
 				this.animationStartPos = this.panelContainer.X;
@@ -388,9 +406,9 @@ namespace PSVReaderUI
 			}
 		}
 		
-		private Label CreateOneCompetibleLabel()
+		private StreamPageLabel CreateOneCompetibleLabel()
 		{
-			Label newLabel = new Label();
+			StreamPageLabel newLabel = new StreamPageLabel();
 			
 			newLabel.Width = this.Width;
 			newLabel.Height = this.Height;
@@ -398,22 +416,18 @@ namespace PSVReaderUI
 			return newLabel;
 		}
 		
-		private void PreparePrevPage()
+		private void PreparePrevPage(int baseIndex)
 		{
 			if (null == contentStrm)
 				return;
 			
-			if (this.pageIndex > 0)
+			if (baseIndex > 0)
 				// already have one
 				return;
 			
 			if (contentStrm.HasPrev())
 			{
-				this.InsertPage(this.pageIndex);
-				
-				Label newLabel = CreateOneCompetibleLabel();
-				
-				this.GetPage(this.pageIndex).AddChildLast(newLabel);
+				StreamPageLabel newLabel = InsertOnePageAt(baseIndex);
 				
 				string strcontent = contentStrm.GetPrevPage(newLabel);
 				
@@ -421,27 +435,34 @@ namespace PSVReaderUI
 			}
 		}
 		
-		private void PrepareNextPage()
+		private void PrepareNextPage(int baseIndex)
 		{
 			if (null == contentStrm)
 				return;
 			
-			if (this.pageIndex < this.pageCount - 1)
-				// already have one
+			// not the lastest page, already have next page
+			if (baseIndex < this.pageCount - 1)
 				return;
 			
-			if (contentStrm.HasPrev())
-			{
-				this.InsertPage(this.pageIndex);
+			if (contentStrm.HasNext())
+			{	
+				StreamPageLabel newLabel = InsertOnePageAt(baseIndex + 1);
 				
-				Label newLabel = CreateOneCompetibleLabel();
-				
-				this.GetPage(this.pageIndex).AddChildLast(newLabel);
-				
-				string strcontent = contentStrm.GetPrevPage(newLabel);
+				string strcontent = contentStrm.GetNextPage(newLabel);
 				
 				newLabel.Text = strcontent;
 			}
+		}
+		
+		private StreamPageLabel InsertOnePageAt(int index)
+		{	
+			this.InsertPage(index);
+			
+			StreamPageLabel newLabel = CreateOneCompetibleLabel();
+			
+			this.GetPage(index).AddChildLast(newLabel);
+	
+			return newLabel;
 		}
 	}
 }

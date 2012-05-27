@@ -31,7 +31,7 @@ namespace PSVReader
 			// Set up the graphics system
 			graphics = new GraphicsContext ();
 			
-			FileManage.StartCheck();
+			Logic.Init();
 			// TODO: Create scenes and call UISystem.SetScene
 			// Create scene			
 			UISystem.Initialize(graphics);
